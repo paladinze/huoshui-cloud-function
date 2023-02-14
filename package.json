@@ -6,7 +6,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js -- "
+    "dev": "nodemon server.js -- ",
+    "deploy": "lean deploy -m 'deploy' --prod 1"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
