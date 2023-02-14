@@ -31,46 +31,46 @@ AV.Cloud.afterSave("Reviews", async function (request) {
 Update corresponding course stats
 -----------------------------------------------------------------*/
 
-  query = new AV.Query("Courses");
+  const query = new AV.Query("Courses");
   const course = await query.get(srcData.courseId);
 
   //get existing data for the course
   const tgtData = {
-    reviewCount: course.get("reviewCount"),
-    reviewGoodCount: course.get("reviewGoodCount"),
+    reviewCount: course.get("reviewCount") || 0,
+    reviewGoodCount: course.get("reviewGoodCount") || 0,
 
-    rateOverall: course.get("rateOverall"),
-    rate1: course.get("rate1"),
-    rate2: course.get("rate2"),
-    rate3: course.get("rate3"),
+    rateOverall: course.get("rateOverall") || 0,
+    rate1: course.get("rate1") || 0,
+    rate2: course.get("rate2") || 0,
+    rate3: course.get("rate3") || 0,
 
-    birdOverall: course.get("birdOverall"),
-    birdCount: course.get("birdCount"),
+    birdOverall: course.get("birdOverall") || 0,
+    birdCount: course.get("birdCount") || 0,
 
-    attendanceOverall: course.get("attendanceOverall"),
-    attendanceCount: course.get("attendanceCount"),
+    attendanceOverall: course.get("attendanceOverall") || 0,
+    attendanceCount: course.get("attendanceCount") || 0,
 
-    homeworkOverall: course.get("homeworkOverall"),
-    homeworkCount: course.get("homeworkCount"),
+    homeworkOverall: course.get("homeworkOverall") || 0,
+    homeworkCount: course.get("homeworkCount") || 0,
 
-    examOverall: course.get("examOverall"),
-    examCount: course.get("examCount"),
+    examOverall: course.get("examOverall") || 0,
+    examCount: course.get("examCount") || 0,
 
     tags: course.get("tags"),
   };
 
   // update core rating
   console.log("update core rating");
-  var rateOverall =
+  const rateOverall =
     (tgtData.rateOverall * tgtData.reviewCount + srcData.rateOverall / 3) /
     (tgtData.reviewCount + 1);
-  var rate1 =
+  const rate1 =
     (tgtData.rate1 * tgtData.reviewCount + srcData.rate1) /
     (tgtData.reviewCount + 1);
-  var rate2 =
+  const rate2 =
     (tgtData.rate2 * tgtData.reviewCount + srcData.rate2) /
     (tgtData.reviewCount + 1);
-  var rate3 =
+  const rate3 =
     (tgtData.rate3 * tgtData.reviewCount + srcData.rate3) /
     (tgtData.reviewCount + 1);
 
@@ -84,7 +84,7 @@ Update corresponding course stats
   course.set("rate3", rate3);
 
   // update secondary rating
-  //bird
+  // bird
   console.log("update bird");
   if (srcData.bird && srcData.bird.value !== 0) {
     var birdOverall =
