@@ -136,7 +136,7 @@ AV.Cloud.define("updateSingleCourseStat", async function (request) {
   if (cmodel.homeworkCount)
     cmodel.homeworkOverall /= cmodel.homeworkCount;
   if (cmodel.examCount) cmodel.examOverall /= cmodel.examCount;
-  console.log("overall" + cmodel.rateOverall);
+  console.log("overall: " + cmodel.rateOverall);
 
   //save the course stats to database
   course.set("tags", cmodel.tags);
