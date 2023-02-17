@@ -5,18 +5,18 @@ const _ = require('lodash');
 /**
  * Long-running job for updating courses
  */
-AV.Cloud.define("jobBatchUpdateCourses", async function (request) {
+AV.Cloud.define("jobBatchFixUserACL", async function (request) {
 
   const start = request.params.start;
   const end = request.params.end;
   const chunkSize = request.params.chunkSize || 50;
 
-  if (!start || !end) {
-    console.log('jobBatchUpdateCourses: missing params');
+  if (start === undefined || end === undefined) {
+    console.log('jobBatchFixUserACL: missing params');
     return;
   }
 
-  console.log(`jobBatchUpdateCourses: ${start} - ${end}, chunk size: ${chunkSize}`)
+  console.log(`jobBatchFixUserACL: ${start} - ${end}, chunk size: ${chunkSize}`)
 
   const range = _.range(start, end);
   const chunks = _.chunk(range, chunkSize);
@@ -29,7 +29,7 @@ AV.Cloud.define("jobBatchUpdateCourses", async function (request) {
 
       console.log(`updating chunks: ${i + 1}/${chunks.length}: ${chunkStart} - ${chunkEnd}`)
       try {
-        await AV.Cloud.run('updateBatchCourseStats', {
+        await AV.Cloud.run('updateBatchUserACL', {
           skip: chunk[0],
           limit: chunkSize
         });
