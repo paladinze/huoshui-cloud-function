@@ -11,7 +11,7 @@ AV.Cloud.define("jobBatchUpdateCourses", async function (request) {
   const end = request.params.end;
   const chunkSize = request.params.chunkSize || 50;
 
-  if (!start || !end) {
+  if (start === undefined || end === undefined) {
     console.log('jobBatchUpdateCourses: missing params');
     return;
   }
