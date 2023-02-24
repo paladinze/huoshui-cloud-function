@@ -77,7 +77,7 @@ AV.Cloud.define("updateSingleCourseStat", async function (request) {
     cmodel.rate3 += rData.rate3;
 
     //bird
-    if (rData.brid && rData.bird.value !== 0) {
+    if (rData.bird && rData.bird.value !== 0) {
       cmodel.birdCount++;
       cmodel.birdOverall += rData.bird.value;
     }
