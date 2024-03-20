@@ -10,7 +10,7 @@ AV.Cloud.beforeUpdate("Reviews", async function (request) {
   const theUser = request.user || request.currentUser;
   console.log("userId: " + JSON.stringify(theUser));
 
-  if (!theUser) throw new AV.Cloud.Error("Invalid user!");
+  // if (!theUser) throw new AV.Cloud.Error("Invalid user!");
 
   const updatedKeys = request.object.updatedKeys;
   // JSON.stringify(updatedKeys);
